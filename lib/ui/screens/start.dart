@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../util/menu.dart';
 import '../widgets/index.dart';
 
 enum Change { toEuros, toPounds }
@@ -35,14 +37,14 @@ class _StartScreenState extends State<StartScreen> {
         ),
         actions: <Widget>[
           PopupMenuButton<String>(
-            onSelected: (result) => null,
-            itemBuilder: (context) => [
-              PopupMenuItem<String>(
-                value: 'WIP',
-                child: Text('WIP'),
-              ),
-            ],
-          )
+            itemBuilder: (context) => Menu.home.keys
+                .map((string) => PopupMenuItem(
+                      value: string,
+                      child: Text(FlutterI18n.translate(context, string)),
+                    ))
+                .toList(),
+            onSelected: (text) => Navigator.pushNamed(context, Menu.home[text]),
+          ),
         ],
       ),
       body: Stack(
@@ -84,7 +86,7 @@ class _StartScreenState extends State<StartScreen> {
             ),
             panel: RowLayout(
               children: <Widget>[
-                Handler(),
+                HandlerBar(),
                 Padding(
                   padding: EdgeInsets.only(left: 20, right: 14),
                   child: Row(
