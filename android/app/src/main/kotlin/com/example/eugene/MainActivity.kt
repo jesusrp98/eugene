@@ -1,4 +1,4 @@
-package com.example.eugene
+package com.chechu.eugene
 
 import android.os.Bundle
 

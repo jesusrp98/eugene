@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:keyboard_utils/keyboard_listener.dart';
+import 'package:keyboard_utils/keyboard_utils.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -19,7 +20,7 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   final PanelController panelController = PanelController();
-  bool sliding = false;
+  final KeyboardUtils _keyboardUtils = KeyboardUtils();
 
   Change _change = Change.toEuros;
   num _input = 0.00;
@@ -28,26 +29,33 @@ class _StartScreenState extends State<StartScreen> {
   void initState() {
     super.initState();
 
-    KeyboardVisibilityNotification().addNewListener(
-      onHide: () {
-        if (sliding) panelController.animatePanelToPosition(0);
-      },
-      // TODO get 0.7 programatically
-      onShow: () => panelController.animatePanelToPosition(0.7),
+    Future.delayed(
+      Duration.zero,
+      () => _keyboardUtils.add(
+        listener: KeyboardListener(
+          willHideKeyboard: () {
+            panelController.animatePanelToPosition(0);
+          },
+          willShowKeyboard: (height) {
+            panelController.animatePanelToPosition(0.7);
+          },
+        ),
+      ),
     );
   }
 
   void closeKeyboard() {
-    if (MediaQuery.of(context).viewInsets.bottom != 0) {
+    print(MediaQuery.of(context).viewInsets.bottom);
+    if (MediaQuery.of(context).viewInsets.bottom != 0 &&
+        (panelController.panelPosition == 1 ||
+            panelController.panelPosition == 0))
       FocusScope.of(context).requestFocus(FocusNode());
-      sliding = false;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -74,15 +82,13 @@ class _StartScreenState extends State<StartScreen> {
       ),
       body: SlidingUpPanel(
         color: Colors.white12,
-        backdropEnabled: true,
         minHeight: 115,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
         ),
         onPanelOpened: closeKeyboard,
-        onPanelClosed: closeKeyboard,
-        onPanelSlide: (_) => sliding = true,
+        // onPanelClosed: closeKeyboard,
         parallaxEnabled: true,
         controller: panelController,
         panel: RowLayout(
