@@ -3,14 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'index.dart';
 
-class BaseThemeState extends Equatable {
-  const BaseThemeState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class ThemeState extends BaseThemeState {
+class ThemeState extends Equatable {
   final Themes theme;
 
   const ThemeState(this.theme) : assert(theme != null);
