@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
+import '../../models/index.dart';
 import '../../repositories/exchange/index.dart';
 import 'index.dart';
 
@@ -31,7 +32,7 @@ class ExchangeBloc extends HydratedBloc<ExchangeEvent, ExchangeState> {
     if (_isBackupOutdated(exchange['date'])) {
       return null;
     } else {
-      return ExchangeLoaded(exchange: exchange.toString());
+      return ExchangeLoaded(exchange: Exchange.fromJson(exchange));
     }
   }
 

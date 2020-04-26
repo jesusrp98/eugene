@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../models/index.dart';
+
 class ExchangeState extends Equatable {
   const ExchangeState();
 
@@ -13,7 +15,7 @@ class ExchangeUninitialized extends ExchangeState {}
 class ExchangeLoading extends ExchangeState {}
 
 class ExchangeLoaded extends ExchangeState {
-  final String exchange;
+  final Exchange exchange;
 
   const ExchangeLoaded({@required this.exchange});
 

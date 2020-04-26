@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../models/index.dart';
 import '../../util/url.dart';
 
 class ExchangeApiClient {
@@ -7,10 +8,10 @@ class ExchangeApiClient {
 
   const ExchangeApiClient(this.client) : assert(client != null);
 
-  Future<String> getExchange() async {
+  Future<Exchange> getExchange() async {
     final response = await client.get(Url.exchangeApi);
     if (response.statusCode == 200) {
-      return response.data.toString();
+      return Exchange.fromJson(response.data);
     } else {
       throw Exception();
     }

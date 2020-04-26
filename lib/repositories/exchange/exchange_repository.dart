@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/index.dart';
 import 'index.dart';
 
 class ExchangeRepository {
@@ -7,7 +8,7 @@ class ExchangeRepository {
 
   ExchangeRepository({@required this.client}) : assert(client != null);
 
-  Future<String> getExchange() async {
+  Future<Exchange> getExchange() async {
     return await client.getExchange();
   }
 }
