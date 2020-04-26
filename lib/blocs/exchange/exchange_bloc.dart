@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../../repository/exchange/index.dart';
+import '../../repositories/exchange/index.dart';
 import 'index.dart';
 
 class ExchangeBloc extends HydratedBloc<ExchangeEvent, ExchangeState> {

@@ -5,7 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'blocs/exchange/index.dart';
 import 'blocs/theme/index.dart';
-import 'repository/exchange/index.dart';
+import 'repositories/exchange/index.dart';
 import 'view/screens/index.dart';
 
 void main() async {
