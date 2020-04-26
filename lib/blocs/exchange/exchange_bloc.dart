@@ -27,18 +27,25 @@ class ExchangeBloc extends HydratedBloc<ExchangeEvent, ExchangeState> {
 
   @override
   ExchangeState fromJson(Map<String, dynamic> json) {
-    final exchange = json['exchange'];
+    try {
+      final exchange = json['exchange'];
 
-    if (_isBackupOutdated(exchange['date'])) {
+      if (_isBackupOutdated(exchange['date']))
+        return null;
+      else
+        return ExchangeLoaded(exchange: Exchange.fromJson(exchange));
+    } catch (_) {
       return null;
-    } else {
-      return ExchangeLoaded(exchange: Exchange.fromJson(exchange));
     }
   }
 
   @override
   Map<String, dynamic> toJson(ExchangeState state) {
-    return {'exchange': state.props.toString()};
+    try {
+      return {'exchange': state.props.toString()};
+    } catch (_) {
+      return null;
+    }
   }
 
   static bool _isBackupOutdated(String backup) =>
