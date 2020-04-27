@@ -9,7 +9,7 @@ class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
 
   @override
   Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
-    if (event is ThemeEvent) {
+    if (event is UpdateTheme) {
       yield ThemeState(event.theme);
     }
   }

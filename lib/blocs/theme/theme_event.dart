@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 
 import 'index.dart';
 
-abstract class BaseThemeEvent extends Equatable {
-  const BaseThemeEvent();
+abstract class ThemeEvent extends Equatable {
+  const ThemeEvent();
 }
 
-class ThemeEvent extends BaseThemeEvent {
+class UpdateTheme extends ThemeEvent {
   final Themes theme;
 
-  const ThemeEvent(this.theme) : assert(theme != null);
+  const UpdateTheme(this.theme) : assert(theme != null);
 
   @override
   List<Object> get props => [theme];

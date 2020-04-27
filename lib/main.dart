@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
+import 'blocs/currency/index.dart';
 import 'blocs/exchange/index.dart';
 import 'blocs/theme/index.dart';
 import 'repositories/exchange/index.dart';
@@ -39,6 +40,7 @@ class EugeneApp extends StatelessWidget {
           create: (_) =>
               ExchangeBloc(repository: repository)..add(FetchExchange()),
         ),
+        BlocProvider(create: (_) => CurrencyBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) => MaterialApp(

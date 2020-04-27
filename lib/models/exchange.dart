@@ -19,7 +19,7 @@ class Exchange extends Equatable {
             'code': rate,
             'value': json['rates'][rate],
           }),
-      ],
+      ]..sort((b, a) => b.code.compareTo(a.code)),
       base: json['base'],
       date: DateTime.parse(json['date']),
     );
