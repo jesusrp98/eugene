@@ -12,9 +12,14 @@ class Exchange extends Equatable {
   });
 
   factory Exchange.fromJson(Map<String, dynamic> json) {
+    final finalJson = {
+      ...json['rates'],
+      ...{'EUR': 1.00}
+    };
+
     return Exchange(
       rates: [
-        for (final rate in (json['rates'] as Map).keys)
+        for (final rate in finalJson.keys)
           Rate.fromJson({
             'code': rate,
             'value': json['rates'][rate],

@@ -12,6 +12,8 @@ class CurrencyBloc extends HydratedBloc<CurrencyEvent, CurrencyState> {
       yield CurrencyState([state.leftCurrency, event.currency]);
     } else if (event is UpdateLeftCurrency) {
       yield CurrencyState([event.currency, state.rightCurrency]);
+    } else if (event is SwapCurrencies) {
+      yield CurrencyState([state.rightCurrency, state.leftCurrency]);
     }
   }
 

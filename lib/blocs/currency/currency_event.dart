@@ -21,3 +21,8 @@ class UpdateRightCurrency extends CurrencyEvent {
   @override
   List<Object> get props => [currency];
 }
+
+class SwapCurrencies extends CurrencyEvent {
+  @override
+  List<Object> get props => [];
+}
