@@ -2,23 +2,28 @@ import 'package:flutter/material.dart';
 
 class CurrencyBox extends StatelessWidget {
   final String currency;
+  final void Function(String) onChange;
+  final void Function() onSwap;
 
   const CurrencyBox({
     Key key,
     this.currency,
+    this.onChange,
+    this.onSwap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: true,
+      // autofocus: true,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,
       style: TextStyle(
         fontSize: 34,
       ),
-      onChanged: (value) => null,
+      onChanged: onChange,
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: currency,
         labelStyle: TextStyle(
           fontFamily: 'RobotoMono',
@@ -30,7 +35,7 @@ class CurrencyBox extends StatelessWidget {
           icon: Icon(Icons.cached),
           iconSize: 44,
           color: Theme.of(context).textTheme.headline6.color,
-          onPressed: () => null,
+          onPressed: onSwap,
           tooltip: 'Swap currencies',
         ),
         enabledBorder: OutlineInputBorder(
