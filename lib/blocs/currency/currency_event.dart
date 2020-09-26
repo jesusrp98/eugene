@@ -26,3 +26,12 @@ class SwapCurrencies extends CurrencyEvent {
   @override
   List<Object> get props => [];
 }
+
+class UpdateExchange extends CurrencyEvent {
+  final double exchange;
+
+  const UpdateExchange(this.exchange) : assert(exchange != null);
+
+  @override
+  List<Object> get props => [exchange];
+}
